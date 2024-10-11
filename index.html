@@ -198,7 +198,7 @@
         const noQrMessage = document.getElementById('no-qr-message');
 
         // Example QR code filenames (replace with real file paths if available)
-        const qrCodes = ['qr1.png', 'qr2.png'];
+        const qrCodes = []; // Empty for testing "no QR codes" case
 
         if (qrCodes.length > 0) {
             qrCodes.forEach(qrCode => {
@@ -208,7 +208,7 @@
                 qrCodeContainer.appendChild(img);
             });
         } else {
-            noQrMessage.style.display = 'block';
+            noQrMessage.style.display = 'block'; // Show animated message if no QR codes
         }
     </script>
 </body>
