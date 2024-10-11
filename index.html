@@ -113,6 +113,45 @@
             box-shadow: 0 8px 20px rgba(0, 123, 255, 0.4);
         }
 
+        /* No QR Code Message */
+        .no-qr {
+            font-size: 1.5em;
+            color: #333;
+            margin-top: 20px;
+            animation: pulse 1.5s infinite;
+        }
+
+        /* Cool animated placeholder for no QR codes */
+        .no-qr::before {
+            content: '⚡';
+            font-size: 3em;
+            display: block;
+            margin-bottom: 10px;
+            animation: spin 2s infinite linear;
+        }
+
+        /* Keyframes for cool animations */
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        @keyframes spin {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
         /* Keyframe Animations */
         @keyframes slideUp {
             from {
@@ -145,12 +184,32 @@
     <!-- Lobby Container -->
     <div id="lobby-container">
         <h1>Scan the QR Codes</h1>
-        <div class="qr-code-container">
-            <!-- Replace 'qr1.png' and 'qr2.png' with your QR code image filenames -->
-            <img src="qr1.png" alt="QR Code 1">
-            <img src="qr2.png" alt="QR Code 2">
+        <div class="qr-code-container" id="qr-code-container">
+            <!-- QR Codes will be inserted here dynamically -->
+        </div>
+        <div class="no-qr" id="no-qr-message" style="display: none;">
+            No QR codes available at the moment.
         </div>
     </div>
 
+    <script>
+        // JavaScript to check for QR codes and handle visibility
+        const qrCodeContainer = document.getElementById('qr-code-container');
+        const noQrMessage = document.getElementById('no-qr-message');
+
+        // Example QR code filenames (replace with real file paths if available)
+        const qrCodes = ['qr1.png', 'qr2.png'];
+
+        if (qrCodes.length > 0) {
+            qrCodes.forEach(qrCode => {
+                const img = document.createElement('img');
+                img.src = qrCode;  // Set QR code image source
+                img.alt = 'QR Code';
+                qrCodeContainer.appendChild(img);
+            });
+        } else {
+            noQrMessage.style.display = 'block';
+        }
+    </script>
 </body>
 </html>
