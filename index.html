@@ -111,6 +111,36 @@
             border: 4px solid rgba(255, 255, 255, 0.4);
         }
 
+        /* Search Bar Styles */
+        .search-container {
+            margin-top: 40px;
+        }
+
+        .search-bar {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 20px;
+            font-size: 1em;
+            outline: none;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: box-shadow 0.3s ease;
+        }
+
+        .search-bar:focus {
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .search-icon {
+            margin-left: -36px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .search-icon:hover {
+            transform: scale(1.1);
+        }
+
         /* Keyframe Animations */
         @keyframes popIn {
             from {
@@ -162,8 +192,26 @@
                 width: 130px;
                 height: 130px;
             }
+
+            .search-bar {
+                font-size: 0.9em;
+            }
         }
     </style>
+    <script>
+        function performSearch() {
+            const query = document.getElementById('search-input').value;
+            if (query) {
+                window.location.href = `https://${query}`;
+            }
+        }
+
+        document.addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                performSearch();
+            }
+        });
+    </script>
 </head>
 <body>
 
@@ -174,11 +222,17 @@
 
     <!-- Main Container -->
     <div id="lobby-container">
-        <h1>Scan the QR Codes</h1>
+        <h1>Download Your Files</h1>
         <div class="qr-code-container">
             <!-- Replace with actual QR code images -->
             <img src="qr1.png" alt="QR Code 1">
             <img src="qr2.png" alt="QR Code 2">
+        </div>
+
+        <!-- Search Bar Container -->
+        <div class="search-container">
+            <input type="text" id="search-input" class="search-bar" placeholder="Search for a website...">
+            <img src="search-icon.png" alt="Search Icon" class="search-icon" onclick="performSearch()" width="30" height="30">
         </div>
     </div>
 
