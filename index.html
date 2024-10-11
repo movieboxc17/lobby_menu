@@ -138,11 +138,14 @@
             top: 50%;
             transform: translateY(-50%);
             cursor: pointer;
-            transition: transform 0.3s ease;
+            /* Removed hover scaling */
+            width: 30px;
+            height: 30px;
+            transition: opacity 0.3s ease;
         }
 
         .search-icon:hover {
-            transform: scale(1.1);
+            opacity: 0.8; /* Change opacity on hover instead */
         }
 
         /* Keyframe Animations */
@@ -236,7 +239,7 @@
         <!-- Search Bar Container -->
         <div class="search-container">
             <input type="text" id="search-input" class="search-bar" placeholder="Search for a website...">
-            <img src="search-icon.png" alt="Search Icon" class="search-icon" onclick="performSearch()" width="30" height="30">
+            <img src="search-icon.png" alt="Search Icon" class="search-icon" onclick="performSearch()">
         </div>
     </div>
 
