@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home Lobby with QR Codes</title>
+    <title>Enhanced QR Lobby</title>
     <style>
         /* Reset and Basic Styling */
         * {
@@ -14,80 +14,74 @@
 
         body {
             font-family: 'Poppins', sans-serif;
-            background: linear-gradient(120deg, #74ebd5, #ACB6E5);
+            background: linear-gradient(135deg, #5f2c82, #49a09d);
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            overflow: hidden;
+            color: #fff;
             position: relative;
         }
 
-        /* Animated background circles */
+        /* Animated Background Circles */
         .circle {
             position: absolute;
             border-radius: 50%;
-            background: rgba(255, 255, 255, 0.15);
-            animation: move 20s infinite ease-in-out;
+            background: rgba(255, 255, 255, 0.1);
+            animation: float 15s infinite ease-in-out;
             pointer-events: none;
         }
 
         .circle1 {
-            width: 500px;
-            height: 500px;
+            width: 600px;
+            height: 600px;
             top: -200px;
             left: -200px;
-            animation-duration: 25s;
         }
 
         .circle2 {
-            width: 400px;
-            height: 400px;
+            width: 450px;
+            height: 450px;
             bottom: -150px;
-            right: -100px;
-            animation-duration: 20s;
+            right: -150px;
         }
 
         .circle3 {
             width: 300px;
             height: 300px;
-            top: 150px;
+            top: 100px;
             right: -150px;
-            animation-duration: 22s;
         }
 
         /* Keyframes for moving circles */
-        @keyframes move {
-            0% {
-                transform: translate(0, 0);
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
             }
             50% {
-                transform: translate(100px, 100px);
-            }
-            100% {
-                transform: translate(0, 0);
+                transform: translateY(40px);
             }
         }
 
-        /* Container for Home Lobby */
+        /* Lobby Container */
         #lobby-container {
-            background: rgba(255, 255, 255, 0.85);
-            border-radius: 20px;
-            padding: 30px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(30px);
+            border-radius: 25px;
+            padding: 60px 50px;
             width: 100%;
-            max-width: 600px;
-            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.15), inset 0 0 20px rgba(0, 255, 255, 0.2);
-            transform: translateY(60px);
-            animation: slideUp 1s ease forwards;
-            backdrop-filter: blur(10px);
+            max-width: 650px;
             text-align: center;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5), inset 0 0 50px rgba(255, 255, 255, 0.2);
+            animation: popIn 1s ease forwards;
         }
 
-        /* Title for Lobby */
         h1 {
-            font-size: 2.5em;
-            margin-bottom: 20px;
-            color: #007bff;
+            font-size: 3.5em;
+            font-weight: 700;
+            letter-spacing: 2px;
+            margin-bottom: 35px;
+            color: #fff;
             opacity: 0;
             animation: fadeIn 1s 0.5s ease forwards;
         }
@@ -95,71 +89,36 @@
         /* QR Code Container */
         .qr-code-container {
             display: flex;
-            justify-content: center;
-            margin: 20px 0;
+            justify-content: space-around;
+            align-items: center;
+            gap: 40px;
+            margin-top: 50px;
         }
 
         .qr-code-container img {
-            margin: 0 20px;
-            width: 150px;
-            height: 150px;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            width: 180px;
+            height: 180px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border 0.3s ease;
+            border: 4px solid transparent;
         }
 
+        /* Hover effects */
         .qr-code-container img:hover {
-            transform: scale(1.05);
-            box-shadow: 0 8px 20px rgba(0, 123, 255, 0.4);
-        }
-
-        /* No QR Code Message */
-        .no-qr {
-            font-size: 1.5em;
-            color: #333;
-            margin-top: 20px;
-            animation: pulse 1.5s infinite;
-        }
-
-        /* Cool animated placeholder for no QR codes */
-        .no-qr::before {
-            content: '⚡';
-            font-size: 3em;
-            display: block;
-            margin-bottom: 10px;
-            animation: spin 2s infinite linear;
-        }
-
-        /* Keyframes for cool animations */
-        @keyframes pulse {
-            0% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.05);
-            }
-            100% {
-                transform: scale(1);
-            }
-        }
-
-        @keyframes spin {
-            from {
-                transform: rotate(0deg);
-            }
-            to {
-                transform: rotate(360deg);
-            }
+            transform: scale(1.1);
+            box-shadow: 0 15px 50px rgba(255, 255, 255, 0.6);
+            border: 4px solid rgba(255, 255, 255, 0.4);
         }
 
         /* Keyframe Animations */
-        @keyframes slideUp {
+        @keyframes popIn {
             from {
-                transform: translateY(60px);
+                transform: scale(0.8);
                 opacity: 0;
             }
             to {
-                transform: translateY(0);
+                transform: scale(1);
                 opacity: 1;
             }
         }
@@ -172,44 +131,56 @@
                 opacity: 1;
             }
         }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .qr-code-container {
+                flex-direction: column;
+                gap: 30px;
+            }
+
+            h1 {
+                font-size: 3em;
+            }
+
+            .qr-code-container img {
+                width: 150px;
+                height: 150px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            #lobby-container {
+                padding: 40px 20px;
+            }
+
+            h1 {
+                font-size: 2.5em;
+            }
+
+            .qr-code-container img {
+                width: 130px;
+                height: 130px;
+            }
+        }
     </style>
 </head>
 <body>
 
-    <!-- Moving background circles -->
+    <!-- Background Circles -->
     <div class="circle circle1"></div>
     <div class="circle circle2"></div>
     <div class="circle circle3"></div>
 
-    <!-- Lobby Container -->
+    <!-- Main Container -->
     <div id="lobby-container">
         <h1>Scan the QR Codes</h1>
-        <div class="qr-code-container" id="qr-code-container">
-            <!-- QR Codes will be inserted here dynamically -->
-        </div>
-        <div class="no-qr" id="no-qr-message" style="display: none;">
-            No QR codes available at the moment.
+        <div class="qr-code-container">
+            <!-- Replace with actual QR code images -->
+            <img src="qr1.png" alt="QR Code 1">
+            <img src="qr2.png" alt="QR Code 2">
         </div>
     </div>
 
-    <script>
-        // JavaScript to check for QR codes and handle visibility
-        const qrCodeContainer = document.getElementById('qr-code-container');
-        const noQrMessage = document.getElementById('no-qr-message');
-
-        // Example QR code filenames (replace with real file paths if available)
-        const qrCodes = []; // Empty for testing "no QR codes" case
-
-        if (qrCodes.length > 0) {
-            qrCodes.forEach(qrCode => {
-                const img = document.createElement('img');
-                img.src = qrCode;  // Set QR code image source
-                img.alt = 'QR Code';
-                qrCodeContainer.appendChild(img);
-            });
-        } else {
-            noQrMessage.style.display = 'block'; // Show animated message if no QR codes
-        }
-    </script>
 </body>
 </html>
